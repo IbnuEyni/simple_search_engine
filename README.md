@@ -13,14 +13,13 @@ Features
 
     Clone the repository:
 
-    bash
+
 
 git clone https://github.com/yourusername/django-search-engine-app.git
 cd django-search-engine-app
 
 ## Create a virtual environment:
 
-bash
 
 python -m venv env
 
@@ -28,31 +27,29 @@ python -m venv env
 
     On Windows:
 
-    bash
+
 
 env\Scripts\activate
 
 On macOS/Linux:
 
-bash
 
     source env/bin/activate
 
 ## Install dependencies:
 
-bash
+
 
 pip install -r requirements.txt
 
 ## Run migrations:
 
-bash
 
 python manage.py migrate
 
 ## Run the development server:
 
-bash
+
 
     python manage.py runserver
 
