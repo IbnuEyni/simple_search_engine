@@ -9,6 +9,8 @@ Features
     Text Preprocessing: Cleans and preprocesses text data for better search accuracy.
     Similarity Calculation: Uses TF-IDF to compute document similarities.
 
+## Demo 
+![ Demo](1.png)(2.png)(3.png)
 ## Installation
 
     Clone the repository:
