@@ -10,7 +10,7 @@ Features
     Similarity Calculation: Uses TF-IDF to compute document similarities.
 
 ## Demo 
-![ Demo](1.png) ![ Demo](2.png) ![ Demo](3.png)
+![ Demo](2.png) ![ Demo](3.png)
 ## Installation
 
     Clone the repository:
