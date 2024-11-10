@@ -73,7 +73,7 @@
 <body>
     <div class="container">
         <h1>Ask a Question</h1>
-        <form id="queryForm" action="{% url 'process_query' %}" method="post">
+        <form id="query-form" action="{% url 'process_query' %}" method="post">
             {% csrf_token %}
             <div>
                 <label for="query">Enter your question:</label>
