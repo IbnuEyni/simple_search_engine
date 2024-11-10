@@ -5,9 +5,9 @@
 This Django application provides a search engine that indexes and queries a predefined set of documents. It uses text processing and machine learning techniques to match queries with these hard-coded documents. The application leverages TfidfVectorizer from scikit-learn for vectorizing documents and querying for similarities.
 Features
 
-    Document Querying: Queries predefined documents for similarity.
-    Text Preprocessing: Cleans and preprocesses text data for better search accuracy.
-    Similarity Calculation: Uses TF-IDF to compute document similarities.
+**Document Querying**: Queries predefined documents for similarity.
+**Text Preprocessing**: Cleans and preprocesses text data for better search accuracy.
+**Similarity Calculation**: Uses TF-IDF to compute document similarities.
 
 ## Demo 
 ![ Demo](2.png) ![ Demo](3.png)
@@ -15,43 +15,32 @@ Features
 
     Clone the repository:
 
-
-
 git clone https://github.com/yourusername/django-search-engine-app.git
 cd django-search-engine-app
 
-## Create a virtual environment:
+## Create a virtual environment
 
+    python -m venv env
 
-python -m venv env
-
-## Activate the virtual environment:
+## Activate the virtual environment
 
     On Windows:
 
+    env\Scripts\activate
 
-
-env\Scripts\activate
-
-On macOS/Linux:
-
+    On macOS/Linux:
 
     source env/bin/activate
 
-## Install dependencies:
+## Install dependencies
 
+    pip install -r requirements.txt
 
+## Run migrations
 
-pip install -r requirements.txt
+    python manage.py migrate
 
-## Run migrations:
-
-
-python manage.py migrate
-
-## Run the development server:
-
-
+## Run the development server
 
     python manage.py runserver
 
@@ -88,7 +77,7 @@ The app uses a hard-coded set of documents for querying. These documents are def
 
 # Text Preprocessing
 
-## The app performs the following preprocessing steps:
+## The app performs the following preprocessing steps
 
     Remove non-ASCII characters
     Remove mentions (e.g., @username)
