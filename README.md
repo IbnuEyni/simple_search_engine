@@ -1,6 +1,6 @@
 # simple_search_engine
 
-### Overview
+## Overview
 
 This Django application provides a search engine that indexes and queries a predefined set of documents. It uses text processing and machine learning techniques to match queries with these hard-coded documents. The application leverages TfidfVectorizer from scikit-learn for vectorizing documents and querying for similarities.
 Features
