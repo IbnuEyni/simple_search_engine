@@ -1,17 +1,20 @@
-from .models import Document
-from django.http import JsonResponse
-from django.shortcuts import render, redirect
 import re
 import string
+
+import docx
+import nltk
 import numpy as np
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-import nltk
+import PyPDF2
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from django.views.decorators.csrf import csrf_exempt
-import PyPDF2
-import docx
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+from .models import Document
+
 
 # Preprocess and clean data
 nltk.download("stopwords")
@@ -58,17 +61,18 @@ english_stopset = set(stopwords.words("english")).union(
 
 lemmatizer = WordNetLemmatizer()
 
+
 def preprocess_data(docs):
     documents_clean = []
     for d in docs:
-        document_test = re.sub(r"[^\x00-\x7F]+", " ", d)  # Replace non-ASCII characters
-        document_test = re.sub(r"@\w+", "", document_test)  # Remove mentions
-        document_test = document_test.lower()  # Convert to lower case
+        document_test = re.sub(r"[^\x00-\x7F]+", " ", d)  
+        document_test = re.sub(r"@\w+", "", document_test)  
+        document_test = document_test.lower() 
         document_test = document_test = re.sub(
             r"[%s]" % re.escape(string.punctuation), " ", document_test
-        ) # Remove punctuation
-        document_test = re.sub(r"[0-9]", "", document_test)  # Remove numbers
-        document_test = re.sub(r"\s{2,}", " ", document_test)  # Remove multiple spaces
+        ) 
+        document_test = re.sub(r"[0-9]", "", document_test)  
+        document_test = re.sub(r"\s{2,}", " ", document_test)  
         documents_clean.append(document_test)
 
     processed_docs = [
@@ -76,6 +80,7 @@ def preprocess_data(docs):
         for text in documents_clean
     ]
     return processed_docs
+
 
 def upload_document_page(request):
     return render(request, "upload_document.html")
@@ -87,7 +92,9 @@ def upload_and_process_documents(request):
         if "document" in request.FILES:
             file = request.FILES["document"]
             file_extension = file.name.split(".")[-1].lower()
-            print(f"[INFO] Uploading document: {file.name} with extension: {file_extension}")  
+            print(
+                f"[INFO] Uploading document: {file.name} with extension: {file_extension}"
+            )  
 
             if file_extension == "pdf":
                 text = extract_text_from_pdf(file)
@@ -99,7 +106,9 @@ def upload_and_process_documents(request):
                 return JsonResponse({"error": "Unsupported file format"}, status=400)
 
             # Save document to database
-            Document.objects.create(title=file.name, file_type=file_extension, content=text)
+            Document.objects.create(
+                title=file.name, file_type=file_extension, content=text
+            )
             print(f"[INFO] Document saved: {file.name}") 
 
             return redirect("query_page")
@@ -107,6 +116,7 @@ def upload_and_process_documents(request):
             return JsonResponse({"error": "No file uploaded"}, status=400)
     else:
         return JsonResponse({"error": "Invalid request method"}, status=405)
+
 
 
 def query_page(request):
@@ -119,35 +129,29 @@ def process_query(request):
         query = request.POST.get("query", "")
         n = int(request.POST.get("n", 1))
         print(f"[INFO] Processing query: {query}")
-        # Retrieve all document contents and titles from the database
-        # documents = Document.objects.all()
         doc_texts = [
             "i loved you ethiopia, stored elements in Compress find Sparse Ethiopia is the greatest country in the world of nation at universe",
             "also, sometimes, the same words can have multiple different 'lemma's. So, based on the context it's used, you should identify the \
         part-of-speech (POS) tag for the word in that specific context and extract the appropriate lemma. Examples of implementing this comes \
         in the following sections countries.ethiopia With a planned.The name that the Blue Nile river loved took in Ethiopia is derived from the \
         Geez word for great to imply its being the river of rivers The word Abay still exists in ethiopia major languages",
-        
             "With more than  million people, ethiopia is the second most populous nation in Africa after Nigeria, and the fastest growing \
          economy in the region. However, it is also one of the poorest, with a per capita income",
-        
             "The primary purpose of the dam ethiopia is electricity production to relieve Ethiopia’s acute energy shortage and for electricity export to neighboring\
          countries.ethiopia With a planned.",
-        
             "The name that the Blue Nile river loved takes in Ethiopia 'abay' is derived from the Geez blue loved word for great to imply its being the river of rivers The \
          word Abay still exists in Ethiopia major languages to refer to anything or anyone considered to be superior.",
-        
             "Two non-upgraded loved turbine-generators with MW each are the first loveto go into operation with loved MW delivered to the national power grid. This early power\
          generation will start well before the completion"
         ]
 
         titles = [
-            "Two upgraded", 
-            "Loved Turbine-Generators", 
-            "Operation With Loved", 
-            "National", 
-            "Power Grid", 
-            "Generator"
+            "Two upgraded",
+            "Loved Turbine-Generators",
+            "Operation With Loved",
+            "National",
+            "Power Grid",
+            "Generator",
         ]
 
         if not doc_texts:
@@ -186,7 +190,7 @@ def process_query(request):
         print(f"[INFO] Query results: {result}")
         return JsonResponse({"result": result})
     else:
-         return JsonResponse({"error": "Invalid request method"}, status=405)
+        return JsonResponse({"error": "Invalid request method"}, status=405)
 
 
 def get_similar_articles(query, doc_texts, df, titles, n):
@@ -198,7 +202,7 @@ def get_similar_articles(query, doc_texts, df, titles, n):
             df.shape[0],
         )
     )
-     # Calculate similarity
+    # Calculate similarity
     sim = {}
     titl = {}
 
@@ -226,7 +230,7 @@ def extract_text_from_pdf(file):
         text = ""
         for page in reader.pages:
             text += page.extract_text() + " "
-        print("[INFO] Extracted text from PDF") 
+        print("[INFO] Extracted text from PDF")
         return text
     except Exception as e:
         return f"Error extracting PDF content: {e}"
@@ -236,15 +240,16 @@ def extract_text_from_docx(file):
     try:
         doc = docx.Document(file)
         text = "\n".join([para.text for para in doc.paragraphs])
-        print("[INFO] Extracted text from DOCX") 
+        print("[INFO] Extracted text from DOCX")
         return text
     except Exception as e:
         return f"Error extracting DOCX content: {e}"
 
+
 def extract_text_from_txt(file):
     try:
         text = file.read().decode("utf-8")
-        print("[INFO] Extracted text from TXT") 
+        print("[INFO] Extracted text from TXT")
         return text
     except Exception as e:
         return f"Error extracting TXT content: {e}"
