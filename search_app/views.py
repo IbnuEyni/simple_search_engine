@@ -1,3 +1,4 @@
+from .models import Document
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 import re
@@ -198,8 +199,8 @@ def get_similar_articles(query, doc_texts, df, titles, n):
         )
     )
      # Calculate similarity
-     sim = {}
-     titl = {}
+    sim = {}
+    titl = {}
 
     for i in range(len(doc_texts)):
         sim[i] = np.dot(df.loc[:, i].values, q_vec) / (
@@ -213,7 +214,7 @@ def get_similar_articles(query, doc_texts, df, titles, n):
 
     results = []
     for i, v in sim_sorted:
-        rresults.append({"title": titles[i], "content": doc_texts[i], "similarity": v})
+        results.append({"title": titles[i], "content": doc_texts[i], "similarity": v})
 
     return results
 
