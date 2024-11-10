@@ -1,6 +1,6 @@
 # simple_search_engine
 
-## Overview
+### Overview
 
 This Django application provides a search engine that indexes and queries a predefined set of documents. It uses text processing and machine learning techniques to match queries with these hard-coded documents. The application leverages TfidfVectorizer from scikit-learn for vectorizing documents and querying for similarities.
 Features
@@ -9,20 +9,20 @@ Features
 **Text Preprocessing**: Cleans and preprocesses text data for better search accuracy.
 **Similarity Calculation**: Uses TF-IDF to compute document similarities.
 
-## Demo 
+### Demo 
 ![ Demo](2.png) ![ Demo](3.png)
-## Installation
+### Installation
 
     Clone the repository:
 
 git clone https://github.com/yourusername/django-search-engine-app.git
 cd django-search-engine-app
 
-## Create a virtual environment
+### Create a virtual environment
 
     python -m venv env
 
-## Activate the virtual environment
+### Activate the virtual environment
 
     On Windows:
 
@@ -32,15 +32,15 @@ cd django-search-engine-app
 
     source env/bin/activate
 
-## Install dependencies
+### Install dependencies
 
     pip install -r requirements.txt
 
-## Run migrations
+### Run migrations
 
     python manage.py migrate
 
-## Run the development server
+### Run the development server
 
     python manage.py runserver
 
@@ -48,14 +48,14 @@ cd django-search-engine-app
 
     Open your web browser and go to http://127.0.0.1:8000/.
 
-# Usage
-## Querying Documents
+## Usage
+### Querying Documents
 
     Navigate to the query page at /query_page/.
     Enter a search query and specify the number of results to return.
     The app will process the query and return the most similar documents from the predefined set.
 
- # Document Data
+### Document Data
 
 The app uses a hard-coded set of documents for querying. These documents are defined in the process_query view function. The predefined documents and their titles are:
 
@@ -75,9 +75,9 @@ The app uses a hard-coded set of documents for querying. These documents are def
         "Power Grid"
         "Generator"
 
-# Text Preprocessing
+## Text Preprocessing
 
-## The app performs the following preprocessing steps
+### The app performs the following preprocessing steps
 
     Remove non-ASCII characters
     Remove mentions (e.g., @username)
@@ -86,7 +86,7 @@ The app uses a hard-coded set of documents for querying. These documents are def
     Remove extra spaces
     Lemmatize words using nltk
 
-## Dependencies
+### Dependencies
 
     Django
     numpy
@@ -94,7 +94,7 @@ The app uses a hard-coded set of documents for querying. These documents are def
     scikit-learn
     nltk
 
-## Contributing
+### Contributing
 
     Fork the repository.
     Create a new branch (git checkout -b feature-branch).
