@@ -128,19 +128,22 @@ def process_query(request):
         n = int(request.POST.get("n", 1))
         print(f"[INFO] Processing query: {query}")
         doc_texts = [
-            "i loved you ethiopia, stored elements in Compress find Sparse Ethiopia is the greatest country in the world of nation at universe",
-            "also, sometimes, the same words can have multiple different 'lemma's. So, based on the context it's used, you should identify the \
-        part-of-speech (POS) tag for the word in that specific context and extract the appropriate lemma. Examples of implementing this comes \
-        in the following sections countries.ethiopia With a planned.The name that the Blue Nile river loved took in Ethiopia is derived from the \
+            "i loved you ethiopia, stored elements in Compress find Sparse Ethiopia is the greatest country \
+        in the world of nation at universe",
+            "also, sometimes, the same words can have multiple different 'lemma's. So, based on the context it's used,\
+        you should identify the part-of-speech (POS) tag for the word in that specific context and extract the \
+        appropriate lemma. Examples of implementing this comes in the following sections countries.ethiopia With \
+        a planned.The name that the Blue Nile river loved took in Ethiopia is derived from the \
         Geez word for great to imply its being the river of rivers The word Abay still exists in ethiopia major languages",
-            "With more than  million people, ethiopia is the second most populous nation in Africa after Nigeria, and the fastest growing \
-         economy in the region. However, it is also one of the poorest, with a per capita income",
-            "The primary purpose of the dam ethiopia is electricity production to relieve Ethiopia’s acute energy shortage and for electricity export to neighboring\
-         countries.ethiopia With a planned.",
-            "The name that the Blue Nile river loved takes in Ethiopia 'abay' is derived from the Geez blue loved word for great to imply its being the river of rivers The \
-         word Abay still exists in Ethiopia major languages to refer to anything or anyone considered to be superior.",
-            "Two non-upgraded loved turbine-generators with MW each are the first loveto go into operation with loved MW delivered to the national power grid. This early power\
-         generation will start well before the completion",
+            "With more than  million people, ethiopia is the second most populous nation in Africa after Nigeria, \
+        and the fastest growing economy in the region. However, it is also one of the poorest, with a per capita income",
+            "The primary purpose of the dam ethiopia is electricity production to relieve Ethiopia’s acute energy shortage and \
+        or electricity export to neighboring countries.ethiopia With a planned.",
+            "The name that the Blue Nile river loved takes in Ethiopia 'abay' is derived from the Geez blue loved word for great \
+        to imply its being the river of rivers The word Abay still exists in Ethiopia major languages \
+        to refer to anything or anyone considered to be superior.",
+            "Two non-upgraded loved turbine-generators with MW each are the first loveto go into operation with loved MW delivered \
+        to the national power grid. This early power generation will start well before the completion",
         ]
 
         titles = [
