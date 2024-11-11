@@ -64,7 +64,7 @@ lemmatizer = WordNetLemmatizer()
 def preprocess_data(docs):
     documents_clean = []
     for d in docs:
-        document_test = re.sub(r'[^\x00-\x7F]+', ' ', d)
+        document_test = re.sub(r"[^\x00-\x7F]+", " ", d)
         document_test = re.sub(r"@\w+", "", document_test)
         document_test = document_test.lower()
         document_test = document_test = re.sub(
